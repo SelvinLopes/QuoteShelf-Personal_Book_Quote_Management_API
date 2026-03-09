@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title><%= heading %></title>
+  <link rel="stylesheet" href="/styles/main.css">
+</head>
+
+<body>
+  <div class="container">
+    <h1><%= heading %></h1>
+
+    <% if (post !== null) { %>
+      <!-- ✏️ Edit post -->
+      <form method="post"
+  action="<%= insideFolder
+    ? `/api/folder/${folderId}/posts/${post.id}`
+    : `/api/posts/${post.id}` %>">
+
+        <% if (!insideFolder) { %>
+  <input type="text" name="title" value="<%= post.title %>" required>
+<% } %>
+
+        <textarea name="content" rows="10" required><%= post.content %></textarea>
+        <input type="text" name="author" value="<%= post.author %>" required>
+        <button type="submit"><%= submit %></button>
+      </form>
+
+    <% } else if (typeof createFolder !== "undefined" && createFolder === true) { %>
+
+      <!-- 📁 Create folder -->
+      <form method="post" action="/api/folder">
+        <input type="text" name="folderName" placeholder="Name your folder" required>
+        <input type="text" name="author" placeholder="Author" required>
+        <button type="submit">Create Folder</button>
+      </form>
+
+    <% } else { %>
+      <!-- ➕ New post -->
+      <form method="post" action="<%= insideFolder ? `/api/folder/${folderId}/posts` : '/api/posts' %>">
+        <% if (!insideFolder) { %>
+          <input type="text" name="title" placeholder="Title" required>
+        <% } %>
+
+        <textarea name="content" rows="10" placeholder="Content" required></textarea>
+        <input type="text" name="author" placeholder="Author" required>
+        <button type="submit"><%= submit %></button>
+      </form>
+
+      <!--incase of new post You are checking createFolder, but I don’t know what it is
+      💥 Hence the crash.so u have to define "createFolder: false"
+      🔑 VERY IMPORTANT RULE (remember forever)
+      Every variable you use in EJS must ALWAYS be sent from the server
+      Even if its false or null. -->
+    <% } %>
+
+  </div>
+</body>
+</html>

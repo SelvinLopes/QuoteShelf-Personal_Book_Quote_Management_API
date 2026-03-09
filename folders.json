@@ -1,0 +1,34 @@
+[
+  {
+    "id": 1767891163823,
+    "name": "\"Rich Dad Poor Dad\"",
+    "posts": [
+      {
+        "id": 1767891186124,
+        "content": "A true luxury is a reward for investing in and developing a real asset.",
+        "author": "selvin lopes",
+        "date": "2026-01-08T16:53:06.124Z"
+      },
+      {
+        "id": 1767891223711,
+        "content": "Losers avoid failing. And failure turns losers into WINNERS.",
+        "author": "lance corriea",
+        "date": "2026-01-08T16:53:43.711Z"
+      }
+    ],
+    "author": "Robert Kiyosaki"
+  },
+  {
+    "id": 1767891276062,
+    "name": "\"You Can Win\"",
+    "posts": [
+      {
+        "id": 1767891427448,
+        "content": "Feeling good is a natural outcome of doing good and doing good is a natural outcome of being good.",
+        "author": "savio lopes",
+        "date": "2026-01-08T16:57:07.448Z"
+      }
+    ],
+    "author": "Shiv Khera"
+  }
+]

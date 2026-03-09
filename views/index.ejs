@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Blog</title>
+  <link rel="stylesheet" href="/styles/main.css">
+  <!-- <script src="https://unpkg.com/axios/dist/axios.min.js"></script> -->
+</head>
+
+<body>
+  <div class="container">
+    <% if (insideFolder) { %>
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+    <h1><%= folders[0].name %></h1>
+    <a href="/" class="btn back-btn">
+      ⬅ Back
+    </a>
+    </div>
+    <% } else { %>
+    <h1>My Book Quotes</h1>
+    <% } %>
+
+
+
+    <% if (!insideFolder) { %>
+    <a id="newPostBtn" href="/new">Upload Post</a> <br><br>
+    <a id="newPostBtn" href="/folder">Create Folder</a>
+    <% } %>
+
+    <% if (insideFolder) { %>
+    <a id="newPostBtn" href="/folder/<%= folders[0].id %>/new">
+    Upload Post
+    </a>
+    <% } %>
+
+
+    <ul id="postsList">
+
+  <!-- 📁 FOLDERS (ONLY ON HOME) -->
+  <% if (!insideFolder) { %>
+    <% folders.forEach(folder => { %>
+      <li>
+        <h2 class="folder-title"><%= folder.name %></h2>
+        <small>By: <%= folder.author %></small>
+        <a class="edit2" href="/folder/<%= folder.id %>">View Folder</a>
+        <a class="delete" href="/api/folder/delete/<%= folder.id %>">
+          Delete Folder
+        </a>
+      </li>
+    <% }); %>
+  <% } %>
+
+  <!-- 📝 POSTS (HOME + INSIDE FOLDER) -->
+  <% posts.forEach(post => { %>
+    <li>
+      <h2><%= post.title %></h2>
+      <small>
+        <%= new Date(post.date).toLocaleString("en-IN", {
+        timeZone: "Asia/Kolkata",
+        dateStyle: "medium",
+        timeStyle: "short"
+        }) %>
+      </small>
+
+      <p><%= post.content %></p>
+      <small>By: <%= post.author %></small>
+
+      <% if (insideFolder) { %>
+        <a class="edit"
+           href="/folder/<%= folders[0].id %>/posts/edit/<%= post.id %>">
+          Edit
+        </a>
+        <a class="delete"
+           href="/api/folder/<%= folders[0].id %>/posts/delete/<%= post.id %>">
+          Delete
+        </a>
+      <% } else { %>
+        <a class="edit" href="/edit/<%= post.id %>">Edit</a>
+        <a class="delete" href="/api/posts/delete/<%= post.id %>">Delete</a>
+      <% } %>
+    </li>
+  <% }); %>
+
+</ul>
+
+  </div>
+
+</body>
+
+</html>
